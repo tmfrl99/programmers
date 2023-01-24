@@ -1,0 +1,24 @@
+def solution(str1, str2):
+    pair1, pair2 = [], []
+    
+    for i in range(1, len(str1)):
+        temp = str1[i-1] + str1[i]
+        if temp.isalpha():
+            pair1.append(temp.upper())
+    for i in range(1, len(str2)):
+        temp = str2[i-1] + str2[i]
+        if temp.isalpha():
+            pair2.append(temp.upper())  
+    
+    if len(pair1) == 0 and len(pair2) == 0:
+        return 65536
+    
+    intersection = 0   
+    for i in pair1:
+        if i in pair2:
+            pair2.remove(i)
+            intersection += 1
+            
+    union = len(pair1+pair2)
+
+    return int((intersection/union)*65536)
